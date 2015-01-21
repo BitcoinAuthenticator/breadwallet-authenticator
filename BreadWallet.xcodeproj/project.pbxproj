@@ -3153,7 +3153,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: alon muroch (7BP7VSW8E6)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3310,7 +3310,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: alon muroch (7BP7VSW8E6)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3349,7 +3349,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer: alon muroch (7BP7VSW8E6)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -3457,7 +3457,7 @@
 				75001D411A1EE89500585F55 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		7579F7F519231A5D00CA56F4 /* Build configuration list for PBXNativeTarget "crypto" */ = {
 			isa = XCConfigurationList;
@@ -3467,7 +3467,7 @@
 				7579F7F719231A5D00CA56F4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		75D5F3B9191EC270004AB296 /* Build configuration list for PBXProject "BreadWallet" */ = {
 			isa = XCConfigurationList;
@@ -3477,7 +3477,7 @@
 				75D5F3F5191EC270004AB296 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		75D5F3F6191EC270004AB296 /* Build configuration list for PBXNativeTarget "breadwallet" */ = {
 			isa = XCConfigurationList;
@@ -3487,7 +3487,7 @@
 				75D5F3F8191EC270004AB296 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		75D5F3F9191EC270004AB296 /* Build configuration list for PBXNativeTarget "BreadWalletTests" */ = {
 			isa = XCConfigurationList;
@@ -3497,7 +3497,7 @@
 				75D5F3FB191EC270004AB296 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 
