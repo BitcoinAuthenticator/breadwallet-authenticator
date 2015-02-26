@@ -720,9 +720,15 @@
     BRBIP32Sequence *seq = [BRBIP32Sequence new];
     NSData *seed = @"000102030405060708090a0b0c0d0e0f".hexToData;
     NSData *mpk = [seq masterPublicKeyFromSeed:seed];
+    
     NSData *pub = [seq publicKey:0 internal:NO masterPublicKey:mpk];
-
     NSLog(@"000102030405060708090a0b0c0d0e0f/0'/0/0 pub = %@", [NSString hexWithData:pub]);
+    
+    pub = [seq publicKey:1 internal:NO masterPublicKey:mpk];
+    NSLog(@"000102030405060708090a0b0c0d0e0f/0'/0/1 pub = %@", [NSString hexWithData:pub]);
+    
+    pub = [seq publicKey:2 internal:NO masterPublicKey:mpk];
+    NSLog(@"000102030405060708090a0b0c0d0e0f/0'/0/2 pub = %@", [NSString hexWithData:pub]);
     
     //TODO: verify the value of pub using the output of some other implementation
 }

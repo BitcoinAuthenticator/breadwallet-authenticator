@@ -177,6 +177,53 @@
     }
 }
 
+-(void)appendMultisigScriptForPubKeys:(NSArray*)keys signaturesRequired:(NSUInteger)signaturesRequired
+{
+    // We need at least one signature
+    if (signaturesRequired == 0) return;
+    
+    // And we cannot have more signatures than available pubkeys.
+    if (signaturesRequired > keys.count) return;
+    
+    uint8_t m = [NSData opCodeForNumber:signaturesRequired];
+    uint8_t n = [NSData opCodeForNumber:keys.count];
+    if (m == OP_INVALIDOPCODE) return;
+    if (n == OP_INVALIDOPCODE) return;
+    
+    // check keys
+    for(NSData *key in keys)
+        if(key.length == 0) return;
+    
+    [self appendUInt8:m];
+    
+    for(NSData *key in keys)
+        [self appendScriptPushData:key];
+    
+    [self appendUInt8:n];
+    
+    [self appendUInt8:OP_CHECKMULTISIG];
+    
+}
+
+-(NSString*)p2shAddress
+{
+    NSData *hash = self.hash160;
+    
+    if (! hash.length) return nil;
+    
+    NSMutableData *d = [NSMutableData secureDataWithCapacity:hash.length + 1];
+    uint8_t version = BITCOIN_SCRIPT_ADDRESS;
+    
+#if BITCOIN_TESTNET
+    version = BITCOIN_SCRIPT_ADDRESS_TEST;
+#endif
+    
+    [d appendBytes:&version length:1];
+    [d appendData:hash];
+    
+    return [NSString base58checkWithData:d];
+}
+
 #pragma mark - bitcoin protocol
 
 - (void)appendMessage:(NSData *)message type:(NSString *)type;

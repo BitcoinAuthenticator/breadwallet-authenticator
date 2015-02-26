@@ -162,4 +162,12 @@
     else return OP_PUSHDATA4;
 }
 
++(uint8_t)opCodeForNumber:(int)number
+{
+    if(number == 0) return OP_0;
+    if(number == -1) return OP_1NEGATE;
+    if(number > 0 && number <=17) return (OP_1 + (number - 1));
+    return OP_INVALIDOPCODE;
+}
+
 @end

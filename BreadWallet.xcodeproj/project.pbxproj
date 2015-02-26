@@ -515,6 +515,9 @@
 		75D5F3F1191EC270004AB296 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75D5F3EF191EC270004AB296 /* InfoPlist.strings */; };
 		75D5F3F3191EC270004AB296 /* BreadWalletTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D5F3F2191EC270004AB296 /* BreadWalletTests.m */; };
 		84F68C8A1975E9E2002FC300 /* BRScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F68C891975E9E2002FC300 /* BRScanViewController.m */; };
+		E1235DEB1A9FB18C0044D9F7 /* BROPCodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E1235DEA1A9FB18C0044D9F7 /* BROPCodeTests.m */; };
+		E1235DF01A9FB8A30044D9F7 /* BRPayToScriptTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1235DEF1A9FB8A30044D9F7 /* BRPayToScriptTest.m */; };
+		E1E38B931A9F2DA200846ED5 /* libauthenticator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E38B831A9F247100846ED5 /* libauthenticator.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -538,6 +541,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 75D5F3BD191EC270004AB296;
 			remoteInfo = BreadWallet;
+		};
+		E1E38B821A9F247100846ED5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1E38B7D1A9F247100846ED5 /* authenticator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E1E38B5B1A9F21BE00846ED5;
+			remoteInfo = authenticator;
+		};
+		E1E38B841A9F247100846ED5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1E38B7D1A9F247100846ED5 /* authenticator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E1E38B661A9F21BE00846ED5;
+			remoteInfo = authenticatorTests;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1244,6 +1261,9 @@
 		84C92C67197C3E0300BD1664 /* x509v3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509v3.h; sourceTree = "<group>"; };
 		84F68C881975E9E2002FC300 /* BRScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRScanViewController.h; sourceTree = "<group>"; };
 		84F68C891975E9E2002FC300 /* BRScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRScanViewController.m; sourceTree = "<group>"; };
+		E1235DEA1A9FB18C0044D9F7 /* BROPCodeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BROPCodeTests.m; sourceTree = "<group>"; };
+		E1235DEF1A9FB8A30044D9F7 /* BRPayToScriptTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRPayToScriptTest.m; sourceTree = "<group>"; };
+		E1E38B7D1A9F247100846ED5 /* authenticator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = authenticator.xcodeproj; path = ../../authenticator/authenticator.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1258,6 +1278,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1E38B931A9F2DA200846ED5 /* libauthenticator.a in Frameworks */,
 				75B8346819233D400010931E /* libcrypto.a in Frameworks */,
 				75878BC3192AED38002505AB /* MessageUI.framework in Frameworks */,
 				75D5F3C4191EC270004AB296 /* CoreGraphics.framework in Frameworks */,
@@ -1371,6 +1392,7 @@
 		7579F7FE19231D4600CA56F4 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				E1E38B7D1A9F247100846ED5 /* authenticator.xcodeproj */,
 				752E28EF19234E8100DB5A3C /* Reachability.h */,
 				752E28F019234E8100DB5A3C /* Reachability.m */,
 				75F27B0619DE2AB20047FC62 /* ccMemory.h */,
@@ -2282,6 +2304,8 @@
 			children = (
 				75BCC59A1946520700EC1A64 /* BreadWalletTests.h */,
 				75D5F3F2191EC270004AB296 /* BreadWalletTests.m */,
+				E1235DEA1A9FB18C0044D9F7 /* BROPCodeTests.m */,
+				E1235DEF1A9FB8A30044D9F7 /* BRPayToScriptTest.m */,
 				75D5F3ED191EC270004AB296 /* Supporting Files */,
 			);
 			path = BreadWalletTests;
@@ -2375,6 +2399,15 @@
 				84C92C67197C3E0300BD1664 /* x509v3.h */,
 			);
 			path = openssl;
+			sourceTree = "<group>";
+		};
+		E1E38B7E1A9F247100846ED5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E1E38B831A9F247100846ED5 /* libauthenticator.a */,
+				E1E38B851A9F247100846ED5 /* authenticatorTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2493,6 +2526,12 @@
 			mainGroup = 75D5F3B5191EC270004AB296;
 			productRefGroup = 75D5F3BF191EC270004AB296 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = E1E38B7E1A9F247100846ED5 /* Products */;
+					ProjectRef = E1E38B7D1A9F247100846ED5 /* authenticator.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				75D5F3BD191EC270004AB296 /* breadwallet */,
@@ -2502,6 +2541,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		E1E38B831A9F247100846ED5 /* libauthenticator.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libauthenticator.a;
+			remoteRef = E1E38B821A9F247100846ED5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E1E38B851A9F247100846ED5 /* authenticatorTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = authenticatorTests.xctest;
+			remoteRef = E1E38B841A9F247100846ED5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		75D5F3BC191EC270004AB296 /* Resources */ = {
@@ -3057,6 +3113,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				75D5F3F3191EC270004AB296 /* BreadWalletTests.m in Sources */,
+				E1235DF01A9FB8A30044D9F7 /* BRPayToScriptTest.m in Sources */,
+				E1235DEB1A9FB18C0044D9F7 /* BROPCodeTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3184,7 +3242,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: alon muroch (F5RPXHGW95)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: alon muroch (F5RPXHGW95)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BreadWallet/BreadWallet-Prefix.pch";
@@ -3377,7 +3435,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: alon muroch (F5RPXHGW95)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: alon muroch (F5RPXHGW95)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BreadWallet/BreadWallet-Prefix.pch";
@@ -3399,7 +3457,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: alon muroch (F5RPXHGW95)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: alon muroch (F5RPXHGW95)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BreadWallet/BreadWallet-Prefix.pch";

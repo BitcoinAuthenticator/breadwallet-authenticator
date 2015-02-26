@@ -25,19 +25,41 @@
 
 #import <Foundation/Foundation.h>
 
-#define VAR_INT16_HEADER 0xfd
-#define VAR_INT32_HEADER 0xfe
-#define VAR_INT64_HEADER 0xff
+#define VAR_INT16_HEADER        0xfd
+#define VAR_INT32_HEADER        0xfe
+#define VAR_INT64_HEADER        0xff
 
 // bitcoin script opcodes: https://en.bitcoin.it/wiki/Script#Constants
-#define OP_PUSHDATA1   0x4c
-#define OP_PUSHDATA2   0x4d
-#define OP_PUSHDATA4   0x4e
-#define OP_DUP         0x76
-#define OP_EQUAL       0x87
-#define OP_EQUALVERIFY 0x88
-#define OP_HASH160     0xa9
-#define OP_CHECKSIG    0xac
+#define OP_PUSHDATA1        0x4c
+#define OP_PUSHDATA2        0x4d
+#define OP_PUSHDATA4        0x4e
+#define OP_DUP              0x76
+#define OP_EQUAL            0x87
+#define OP_EQUALVERIFY      0x88
+#define OP_HASH160          0xa9
+#define OP_CHECKSIG         0xac
+#define OP_CHECKMULTISIG    0xae
+
+#define OP_0                0x00
+#define OP_1NEGATE          0x4f
+#define OP_1                0x51
+#define OP_2                0x52
+#define OP_3                0x53
+#define OP_4                0x54
+#define OP_5                0x55
+#define OP_6                0x56
+#define OP_7                0x57
+#define OP_8                0x58
+#define OP_9                0x59
+#define OP_10               0x5a
+#define OP_11               0x5b
+#define OP_12               0x5c
+#define OP_13               0x5d
+#define OP_14               0x5e
+#define OP_15               0x5f
+#define OP_16               0x60
+
+#define OP_INVALIDOPCODE    0xff
 
 @interface NSData (Bitcoin)
 
@@ -51,5 +73,6 @@
 - (NSData *)dataAtOffset:(NSUInteger)offset length:(NSUInteger *)length;
 - (NSArray *)scriptElements; // an array of NSNumber and NSData objects representing each script element
 - (int)intValue; // returns the opcode used to store the receiver in a script (i.e. OP_PUSHDATA1)
++(uint8_t)opCodeForNumber:(int)number;
 
 @end

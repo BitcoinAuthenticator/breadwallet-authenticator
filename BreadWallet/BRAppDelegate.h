@@ -24,12 +24,12 @@
 //  THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
+#import <Authenticator/AuthenticatorAppDelegateExtender.h>
 
 #define BRURLNotification  @"BRURLNotification"
 #define BRFileNotification @"BRFileNotification"
 
-@interface BRAppDelegate : UIResponder <UIApplicationDelegate>
+@interface BRAppDelegate : AuthenticatorAppDelegateExtender
 
-@property (strong, nonatomic) UIWindow *window;
 
 @end
