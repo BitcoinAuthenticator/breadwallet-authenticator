@@ -25,7 +25,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class BRReceiveViewController, BRSendViewController;
+@class BRReceiveViewController, BRSendViewController, BRAuthenticatorViewController;
 
 @interface BRRootViewController : UIViewController <UIAlertViewDelegate, UIActionSheetDelegate,
 UIPageViewControllerDataSource, UIScrollViewDelegate, UINavigationControllerDelegate,
@@ -33,6 +33,7 @@ UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
 
 @property (nonatomic, strong) IBOutlet BRReceiveViewController *receiveViewController;
 @property (nonatomic, strong) IBOutlet BRSendViewController *sendViewController;
+@property (nonatomic, strong) IBOutlet BRAuthenticatorViewController *authenticatorViewController;
 @property (nonatomic, strong) IBOutlet UIPageViewController *pageViewController;
 
 - (IBAction)tip:(id)sender;

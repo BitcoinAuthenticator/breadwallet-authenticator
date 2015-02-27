@@ -26,6 +26,7 @@
 #import "BRRootViewController.h"
 #import "BRReceiveViewController.h"
 #import "BRSendViewController.h"
+#import "BRAuthenticatorViewController.h"
 #import "BRAppDelegate.h"
 #import "BRBubbleView.h"
 #import "BRBouncyBurgerButton.h"
@@ -88,6 +89,7 @@
     
     self.receiveViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReceiveViewController"];
     self.sendViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SendViewController"];
+    self.authenticatorViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AuthenticatorViewController"];
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
 
     self.pageViewController.dataSource = self;
@@ -711,23 +713,38 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
 viewControllerBeforeViewController:(UIViewController *)viewController
 {
-    return (viewController == self.receiveViewController) ? self.sendViewController : nil;
+    if(viewController == self.receiveViewController)
+        return self.sendViewController;
+    else if (viewController == self.authenticatorViewController)
+        return self.receiveViewController;
+    else
+        return nil;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
 viewControllerAfterViewController:(UIViewController *)viewController
 {
-    return (viewController == self.sendViewController) ? self.receiveViewController : nil;
+    if(viewController == self.sendViewController)
+        return self.receiveViewController;
+    else if (viewController == self.receiveViewController)
+        return self.authenticatorViewController;
+    else
+        return nil;
 }
 
 - (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController
 {
-    return (pageViewController.viewControllers.lastObject == self.receiveViewController) ? 1 : 0;
+    if(pageViewController.viewControllers.lastObject == self.sendViewController)
+        return 0;
+    else if (pageViewController.viewControllers.lastObject == self.receiveViewController)
+        return 1;
+    else
+        return 2;
 }
 
 #pragma mark - UIScrollViewDelegate

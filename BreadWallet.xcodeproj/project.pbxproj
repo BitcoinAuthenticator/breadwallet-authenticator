@@ -517,6 +517,7 @@
 		84F68C8A1975E9E2002FC300 /* BRScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F68C891975E9E2002FC300 /* BRScanViewController.m */; };
 		E1235DEB1A9FB18C0044D9F7 /* BROPCodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E1235DEA1A9FB18C0044D9F7 /* BROPCodeTests.m */; };
 		E1235DF01A9FB8A30044D9F7 /* BRPayToScriptTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1235DEF1A9FB8A30044D9F7 /* BRPayToScriptTest.m */; };
+		E1388C851AA0860B00BE8E0E /* BRAuthenticatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1388C841AA0860B00BE8E0E /* BRAuthenticatorViewController.m */; };
 		E1E38B931A9F2DA200846ED5 /* libauthenticator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E38B831A9F247100846ED5 /* libauthenticator.a */; };
 /* End PBXBuildFile section */
 
@@ -1263,6 +1264,8 @@
 		84F68C891975E9E2002FC300 /* BRScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRScanViewController.m; sourceTree = "<group>"; };
 		E1235DEA1A9FB18C0044D9F7 /* BROPCodeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BROPCodeTests.m; sourceTree = "<group>"; };
 		E1235DEF1A9FB8A30044D9F7 /* BRPayToScriptTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRPayToScriptTest.m; sourceTree = "<group>"; };
+		E1388C831AA0860B00BE8E0E /* BRAuthenticatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRAuthenticatorViewController.h; sourceTree = "<group>"; };
+		E1388C841AA0860B00BE8E0E /* BRAuthenticatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRAuthenticatorViewController.m; sourceTree = "<group>"; };
 		E1E38B7D1A9F247100846ED5 /* authenticator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = authenticator.xcodeproj; path = ../../authenticator/authenticator.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2231,6 +2234,8 @@
 				757BE7E2192C0E9D0061CB20 /* BRRestoreViewController.m */,
 				757BE7E7192D4E880061CB20 /* BRSeedViewController.h */,
 				757BE7E8192D4E880061CB20 /* BRSeedViewController.m */,
+				E1388C831AA0860B00BE8E0E /* BRAuthenticatorViewController.h */,
+				E1388C841AA0860B00BE8E0E /* BRAuthenticatorViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -3065,6 +3070,7 @@
 				75AA5F55194143D5003F23BD /* BRBouncyBurgerButton.m in Sources */,
 				752E28AB19234AE300DB5A3C /* BRMerkleBlockEntity.m in Sources */,
 				752E28AC19234AE300DB5A3C /* BRPeerEntity.m in Sources */,
+				E1388C851AA0860B00BE8E0E /* BRAuthenticatorViewController.m in Sources */,
 				752E28AD19234AE300DB5A3C /* BRTransactionEntity.m in Sources */,
 				752E28AE19234AE300DB5A3C /* BRTxInputEntity.m in Sources */,
 				752E28AF19234AE300DB5A3C /* BRTxOutputEntity.m in Sources */,
