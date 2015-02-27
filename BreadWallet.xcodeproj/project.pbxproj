@@ -515,6 +515,7 @@
 		75D5F3F1191EC270004AB296 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75D5F3EF191EC270004AB296 /* InfoPlist.strings */; };
 		75D5F3F3191EC270004AB296 /* BreadWalletTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D5F3F2191EC270004AB296 /* BreadWalletTests.m */; };
 		84F68C8A1975E9E2002FC300 /* BRScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F68C891975E9E2002FC300 /* BRScanViewController.m */; };
+		E11F1AE21AA1216C00B5BEDE /* BRAuthenticatorPendingRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = E11F1AE11AA1216C00B5BEDE /* BRAuthenticatorPendingRequests.m */; };
 		E1235DEB1A9FB18C0044D9F7 /* BROPCodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E1235DEA1A9FB18C0044D9F7 /* BROPCodeTests.m */; };
 		E1235DF01A9FB8A30044D9F7 /* BRPayToScriptTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1235DEF1A9FB8A30044D9F7 /* BRPayToScriptTest.m */; };
 		E1388C851AA0860B00BE8E0E /* BRAuthenticatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1388C841AA0860B00BE8E0E /* BRAuthenticatorViewController.m */; };
@@ -1262,6 +1263,8 @@
 		84C92C67197C3E0300BD1664 /* x509v3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509v3.h; sourceTree = "<group>"; };
 		84F68C881975E9E2002FC300 /* BRScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRScanViewController.h; sourceTree = "<group>"; };
 		84F68C891975E9E2002FC300 /* BRScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRScanViewController.m; sourceTree = "<group>"; };
+		E11F1AE01AA1216C00B5BEDE /* BRAuthenticatorPendingRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRAuthenticatorPendingRequests.h; sourceTree = "<group>"; };
+		E11F1AE11AA1216C00B5BEDE /* BRAuthenticatorPendingRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRAuthenticatorPendingRequests.m; sourceTree = "<group>"; };
 		E1235DEA1A9FB18C0044D9F7 /* BROPCodeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BROPCodeTests.m; sourceTree = "<group>"; };
 		E1235DEF1A9FB8A30044D9F7 /* BRPayToScriptTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRPayToScriptTest.m; sourceTree = "<group>"; };
 		E1388C831AA0860B00BE8E0E /* BRAuthenticatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRAuthenticatorViewController.h; sourceTree = "<group>"; };
@@ -2236,6 +2239,8 @@
 				757BE7E8192D4E880061CB20 /* BRSeedViewController.m */,
 				E1388C831AA0860B00BE8E0E /* BRAuthenticatorViewController.h */,
 				E1388C841AA0860B00BE8E0E /* BRAuthenticatorViewController.m */,
+				E11F1AE01AA1216C00B5BEDE /* BRAuthenticatorPendingRequests.h */,
+				E11F1AE11AA1216C00B5BEDE /* BRAuthenticatorPendingRequests.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -3098,6 +3103,7 @@
 				75878BC6192B1AF0002505AB /* BRTxHistoryViewController.m in Sources */,
 				757BE7E3192C0E9D0061CB20 /* BRRestoreViewController.m in Sources */,
 				757BE7E6192C1FF70061CB20 /* BRWelcomeViewController.m in Sources */,
+				E11F1AE21AA1216C00B5BEDE /* BRAuthenticatorPendingRequests.m in Sources */,
 				757BE7E9192D4E880061CB20 /* BRSeedViewController.m in Sources */,
 				752E28E719234DA200DB5A3C /* NSData+Bitcoin.m in Sources */,
 				752E28E819234DA200DB5A3C /* NSData+Hash.m in Sources */,

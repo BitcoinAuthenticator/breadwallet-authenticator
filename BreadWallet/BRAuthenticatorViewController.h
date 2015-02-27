@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BRAuthenticatorViewController : UIViewController
+@interface BRAuthenticatorViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *lblExplanation;
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
+
 @end
