@@ -37,7 +37,11 @@
 
 @interface BRTransaction ()
 
-@property (nonatomic, strong) NSMutableArray *hashes, *indexes, *inScripts, *signatures, *sequences;
+@property (nonatomic, strong) NSMutableArray *hashes,       // are the connected input tx hashes
+                                                *indexes,
+                                                *inScripts, // are the output scripts of the connected input transaction
+                                                *signatures,
+                                                *sequences;
 @property (nonatomic, strong) NSMutableArray *amounts, *addresses, *outScripts;
 
 @end
@@ -342,22 +346,74 @@ sequence:(uint32_t)sequence
         [addresses addObject:key.address];
     }
     
+    // order keys and scripts
+    NSMutableArray *orderedKeys = [[NSMutableArray alloc] init];
+    NSMutableArray *orderedRedeemScripts = [[NSMutableArray alloc] init];
     for (NSUInteger i = 0; i < self.hashes.count; i++) {
         NSString *addr = [NSString addressWithScriptPubKey:self.inScripts[i]];
         NSUInteger keyIdx = addr ? [addresses indexOfObject:addr] : NSNotFound;
-        
         if (keyIdx == NSNotFound) continue;
-        
+
+        [orderedKeys addObject:keys[keyIdx]];
+        [orderedRedeemScripts addObject:self.inScripts[i]];
+    }
+
+    return [self signWithPrivateKeys:orderedKeys andConnectedRedeemScripts:orderedRedeemScripts];
+    
+//    for (NSUInteger i = 0; i < self.hashes.count; i++) {
+//        NSString *addr = [NSString addressWithScriptPubKey:self.inScripts[i]];
+//        NSUInteger keyIdx = addr ? [addresses indexOfObject:addr] : NSNotFound;
+//        
+//        if (keyIdx == NSNotFound) continue;
+//
+//        NSMutableData *sig = [NSMutableData data];
+//        NSData *hash = [self toDataWithSubscriptIndex:i].SHA256_2;
+//        NSMutableData *s = [NSMutableData dataWithData:[keys[keyIdx] sign:hash]];
+//        NSArray *elem = [self.inScripts[i] scriptElements];
+//        
+//        [s appendUInt8:SIGHASH_ALL];
+//        [sig appendScriptPushData:s];
+//        
+//        if (elem.count >= 2 && [elem[elem.count - 2] intValue] == OP_EQUALVERIFY) { // pay-to-pubkey-hash scriptSig
+//            [sig appendScriptPushData:[keys[keyIdx] publicKey]];
+//        }
+//        else if(elem.count == 3 && [elem[elem.count - 1] intValue] == OP_EQUAL) {   // pay-to-hash scriptsig
+//            [sig appendScriptPushData:self.inScripts[i]];
+//        }
+//        
+//        [self.signatures replaceObjectAtIndex:i withObject:sig];
+//    }
+//    
+//    if (! [self isSigned]) return NO;
+//    
+//    _txHash = self.data.SHA256_2;
+//    
+//    return YES;
+}
+
+/** redeemScript is the scriptPubKey that is being satisified (pay-to-pub-hash), or the P2SH redeem script.
+ *  private keys and redeemscripts should be ordered to match the tx inputs, that is
+ *      tx.in[0] with privateKeys[0] and redeemScript[0]
+ */
+- (BOOL)signWithPrivateKeys:(NSArray *)privateKeys andConnectedRedeemScripts:(NSArray*)redeemScripts
+{
+    for (NSUInteger i = 0; i < self.hashes.count; i++) {
         NSMutableData *sig = [NSMutableData data];
         NSData *hash = [self toDataWithSubscriptIndex:i].SHA256_2;
-        NSMutableData *s = [NSMutableData dataWithData:[keys[keyIdx] sign:hash]];
-        NSArray *elem = [self.inScripts[i] scriptElements];
+        BRKey *key = privateKeys[i];
+        NSMutableData *s = [NSMutableData dataWithData:[key sign:hash]];
+        
+        NSData* inscript = redeemScripts[i];
+        NSArray *elem = [inscript scriptElements];
         
         [s appendUInt8:SIGHASH_ALL];
         [sig appendScriptPushData:s];
         
         if (elem.count >= 2 && [elem[elem.count - 2] intValue] == OP_EQUALVERIFY) { // pay-to-pubkey-hash scriptSig
-            [sig appendScriptPushData:[keys[keyIdx] publicKey]];
+            [sig appendScriptPushData:[key publicKey]];
+        }
+        else {   // pay-to-hash scriptsig
+            [sig appendScriptPushData:inscript];
         }
         
         [self.signatures replaceObjectAtIndex:i withObject:sig];
