@@ -185,8 +185,8 @@
     // And we cannot have more signatures than available pubkeys.
     if (signaturesRequired > keys.count) return;
     
-    uint8_t m = [NSData opCodeForNumber:signaturesRequired];
-    uint8_t n = [NSData opCodeForNumber:keys.count];
+    uint8_t m = [NSData opCodeForNumber:(int)signaturesRequired];
+    uint8_t n = [NSData opCodeForNumber:(int)keys.count];
     if (m == OP_INVALIDOPCODE) return;
     if (n == OP_INVALIDOPCODE) return;
     

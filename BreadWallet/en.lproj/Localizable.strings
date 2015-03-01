@@ -423,3 +423,6 @@
 
 /* No comment provided by engineer. */
 "Authenticator Explanation" = "An estimated 664,000 BTC have been lost or stolen to date.\n2-Factor Authentication protects your bitcoins even if your wallet is compromised.";
+
+/* No comment provided by engineer. */
+"Pair new authenticator" = "Pair new authenticator";

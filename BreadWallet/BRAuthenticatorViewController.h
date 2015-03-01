@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BRScanViewController.h"
 
-@interface BRAuthenticatorViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface BRAuthenticatorViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, AVCaptureMetadataOutputObjectsDelegate, UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
 
 @property (weak, nonatomic) IBOutlet UILabel *lblExplanation;
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
+
+@property (nonatomic, strong) BRScanViewController *scanController;
 
 @end

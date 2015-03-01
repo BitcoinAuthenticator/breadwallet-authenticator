@@ -320,6 +320,19 @@
     [self.tableView endUpdates];
 }
 
+-(IBAction)pairAuthenticator:(id)sender
+{
+    UINavigationController *nav = (id)self.navigationController.presentingViewController;
+    
+    nav.view.alpha = 0.0;
+    
+    [nav dismissViewControllerAnimated:NO completion:^{
+        [[nav.viewControllers.firstObject pageViewController] setViewControllers:@[[nav.viewControllers.firstObject authenticatorViewController]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+        [(id)[nav.viewControllers.firstObject authenticatorViewController] pairAuthenticator:nil];
+        [UIView animateWithDuration:0.1 delay:1.5 options:0 animations:^{ nav.view.alpha = 1.0; } completion:nil];
+    }];
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -335,7 +348,7 @@
             return (self.moreTx) ? self.transactions.count + 1 : self.transactions.count;
 
         case 1:
-            return 2;
+            return 3;
 
         case 2:
             return 1;
@@ -461,6 +474,11 @@
                     cell.imageView.image = [UIImage imageNamed:@"rescan"];
                     cell.imageView.alpha = 0.75;
                     break;
+                case 2:
+                    cell.textLabel.text = NSLocalizedString(@"Pair new authenticator", nil);
+                    cell.imageView.image = [UIImage imageNamed:@"key"];
+                    cell.imageView.alpha = 0.75;
+                    break;
             }
             
             break;
@@ -577,6 +595,9 @@
                 case 1: // rescan blockchain
                     [[BRPeerManager sharedInstance] rescan];
                     [self done:nil];
+                    break;
+                case 2:
+                    [self pairAuthenticator:nil];
                     break;
             }
 
