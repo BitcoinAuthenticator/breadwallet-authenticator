@@ -7,6 +7,8 @@
 //
 
 #import "BRAuthenticatorViewController.h"
+#import <Authenticator/BAPairingProtocol.h>
+#import <Authenticator/Authenticator.h>
 
 @interface BRAuthenticatorViewController ()
 
@@ -97,7 +99,43 @@ static NSString *CellIdentifier = @"authenticatorWalletCellIdentifier";
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects
        fromConnection:(AVCaptureConnection *)connection
 {
-    
+    for (AVMetadataMachineReadableCodeObject *o in metadataObjects) {
+        if (! [o.type isEqual:AVMetadataObjectTypeQRCode]) continue;
+        
+        NSString *s = o.stringValue;
+        
+        BAPairingProtocol *pairingProtocolo = [Authenticator pair:s];
+        if([pairingProtocolo isValid])
+        {
+            BAPairingData *data = [pairingProtocolo pairingData];
+            [Authenticator addPairing:data];
+            
+            self.scanController.cameraGuide.image = [UIImage imageNamed:@"cameraguide-green"];
+            [self.scanController stop];
+            [self resetQRGuide];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.35 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                [self.navigationController dismissViewControllerAnimated:YES completion:^{
+                    [self resetQRGuide];
+                }];
+            });
+        }
+        else {
+            self.scanController.cameraGuide.image = [UIImage imageNamed:@"cameraguide-red"];
+            self.scanController.message.text = NSLocalizedString(@"Not an Authenticator pairing QR", nil);
+            [self performSelector:@selector(resetQRGuide) withObject:nil afterDelay:0.35];
+        }
+        
+        NSLog(@"");
+        
+        break;
+    }
+}
+
+- (void)resetQRGuide
+{
+    self.scanController.message.text = nil;
+    self.scanController.cameraGuide.image = [UIImage imageNamed:@"cameraguide"];
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate

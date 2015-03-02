@@ -426,3 +426,6 @@
 
 /* No comment provided by engineer. */
 "Pair new authenticator" = "Pair new authenticator";
+
+/* No comment provided by engineer. */
+"Not an Authenticator pairing QR" = "Not an Authenticator pairing QR";
