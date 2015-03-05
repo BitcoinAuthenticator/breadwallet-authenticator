@@ -7,6 +7,7 @@
 //
 
 #import "BRAuthenticatorViewController.h"
+#import "BRAuthenticatorPendingRequests.h"
 #import <Authenticator/BAPairingProtocol.h>
 #import <Authenticator/Authenticator.h>
 #import <Authenticator/NSManagedObject+Manager.h>
@@ -18,6 +19,7 @@
 @implementation BRAuthenticatorViewController
 
 NSArray *pairings;
+int lastSelectedPairingIdx;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,6 +27,12 @@ NSArray *pairings;
     [self.lblExplanation setText:NSLocalizedString(@"Authenticator Explanation", nil)];
     self.scanController = [self.storyboard instantiateViewControllerWithIdentifier:@"ScanViewController"];
     [self loadPairingsData];
+    
+    [[NSNotificationCenter defaultCenter]
+                             addObserver:self
+                             selector:@selector(handleDataModelChange:)
+                             name:NSManagedObjectContextObjectsDidChangeNotification
+                             object:[BAPairingData _context]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,12 +45,22 @@ NSArray *pairings;
     return NO; // so to always perform segue
 }
 
+#pragma Data model changes callback
+
+- (void)handleDataModelChange:(NSNotification *)note
+{
+    [self loadPairingsData];
+}
+
  #pragma mark - Navigation
  
  // In a storyboard-based application, you will often want to do a little preparation before navigation
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
+     
+     BRAuthenticatorPendingRequests *v = (BRAuthenticatorPendingRequests *)[[segue destinationViewController] topViewController];
+     v.pairingData = [pairings objectAtIndex:lastSelectedPairingIdx];
  }
 
 #pragma UITableView data source + delegate
@@ -50,7 +68,7 @@ NSArray *pairings;
 -(void)loadPairingsData
 {
     pairings = [BAPairingData _allObjects];
-    NSLog(@"");
+    [self.tblView reloadData];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -79,6 +97,7 @@ static NSString *CellIdentifier = @"authenticatorWalletCellIdentifier";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    lastSelectedPairingIdx = (int)indexPath.row;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -115,7 +134,7 @@ static NSString *CellIdentifier = @"authenticatorWalletCellIdentifier";
         {
             [pairingProtocolo pairingData];
             pairings = [BAPairingData _allObjects];
-            [self.tblView reloadData];
+            // will update the table via NSNotificationCenter
             
             self.scanController.cameraGuide.image = [UIImage imageNamed:@"cameraguide-green"];
             [self.scanController stop];

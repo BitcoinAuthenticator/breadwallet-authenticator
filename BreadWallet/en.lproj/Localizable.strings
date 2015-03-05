@@ -429,3 +429,15 @@
 
 /* No comment provided by engineer. */
 "Not an Authenticator pairing QR" = "Not an Authenticator pairing QR";
+
+/* No comment provided by engineer. */
+"delete pairing alert msg" = "Are you sure you want to delete the Authenticator pairing?";
+
+/* No comment provided by engineer. */
+"warning" = "Warning";
+
+/* No comment provided by engineer. */
+"ok" = "Ok";
+
+/* No comment provided by engineer. */
+"cancel" = "Cancel";

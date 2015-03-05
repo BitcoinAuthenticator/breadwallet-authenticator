@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Authenticator/BAPairingData.h>
 
-@interface BRAuthenticatorPendingRequests : UIViewController
+@interface BRAuthenticatorPendingRequests : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
+
+@property(nonatomic, strong) BAPairingData *pairingData;
 
 @end
