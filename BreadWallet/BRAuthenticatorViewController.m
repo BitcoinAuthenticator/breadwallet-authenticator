@@ -9,6 +9,7 @@
 #import "BRAuthenticatorViewController.h"
 #import <Authenticator/BAPairingProtocol.h>
 #import <Authenticator/Authenticator.h>
+#import <Authenticator/NSManagedObject+Manager.h>
 
 @interface BRAuthenticatorViewController ()
 
@@ -16,16 +17,14 @@
 
 @implementation BRAuthenticatorViewController
 
-NSMutableArray *wallets;
+NSArray *pairings;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    wallets = [[NSMutableArray alloc] init];
-    
     [self.lblExplanation setText:NSLocalizedString(@"Authenticator Explanation", nil)];
-    
     self.scanController = [self.storyboard instantiateViewControllerWithIdentifier:@"ScanViewController"];
+    [self loadPairingsData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,25 +47,32 @@ NSMutableArray *wallets;
 
 #pragma UITableView data source + delegate
 
+-(void)loadPairingsData
+{
+    pairings = [BAPairingData _allObjects];
+    NSLog(@"");
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return pairings == nil? 0:[pairings count];
 }
 
 static NSString *CellIdentifier = @"authenticatorWalletCellIdentifier";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
+    BAPairingData *d = [pairings objectAtIndex:indexPath.row];
     // Configure Cell
     // Tags:
     //      10) image view
     //      11) Wallet name label
     //      12) wallet id label
     UILabel *label = (UILabel *)[cell.contentView viewWithTag:11];
-    [label setText:@"What ?"];
+    [label setText:d.pairingName];
     
     return cell;
 }
@@ -107,8 +113,9 @@ static NSString *CellIdentifier = @"authenticatorWalletCellIdentifier";
         BAPairingProtocol *pairingProtocolo = [Authenticator pair:s];
         if([pairingProtocolo isValid])
         {
-            BAPairingData *data = [pairingProtocolo pairingData];
-            [Authenticator addPairing:data];
+            [pairingProtocolo pairingData];
+            pairings = [BAPairingData _allObjects];
+            [self.tblView reloadData];
             
             self.scanController.cameraGuide.image = [UIImage imageNamed:@"cameraguide-green"];
             [self.scanController stop];
