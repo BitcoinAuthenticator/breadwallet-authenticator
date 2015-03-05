@@ -8,6 +8,7 @@
 
 #import "BRAuthenticatorPendingRequests.h"
 #import <Authenticator/NSManagedObject+Manager.h>
+#import "DLAVAlertView.h"
 
 @interface BRAuthenticatorPendingRequests ()
 
@@ -50,30 +51,53 @@
 }
 
 - (IBAction)delete:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"warning", nil)
-                                                   message:NSLocalizedString(@"delete pairing alert msg", nil)
-                                                  delegate:self
-                                         cancelButtonTitle:NSLocalizedString(@"cancel", nil)
-                                         otherButtonTitles:NSLocalizedString(@"ok", nil), nil];
-    
-    alert.tag = deletePairingAlertTag;
-    [alert show];
+    DLAVAlertView *alertView = [[DLAVAlertView alloc] initWithTitle:NSLocalizedString(@"warning", nil)
+                                                            message:NSLocalizedString(@"delete pairing alert msg", nil)
+                                                            delegate:nil
+                                                            cancelButtonTitle:NSLocalizedString(@"cancel", nil)
+                                                            otherButtonTitles:NSLocalizedString(@"ok", nil), nil];
+     [alertView showWithCompletion:^(DLAVAlertView *alertView, NSInteger buttonIndex) {
+         if(buttonIndex != alertView.cancelButtonIndex)
+         {
+             [BAPairingData _deleteObjects:[NSArray arrayWithObject:self.pairingData]];
+             [BAPairingData _saveContext];
+         }
+      }];
 }
 
 - (IBAction)rename:(id)sender {
-}
-
-#pragma UIAlertView delegate
-const int deletePairingAlertTag = 101;
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(alertView.tag == deletePairingAlertTag) {
+//    SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:NSLocalizedString(@"warning", nil) andMessage:NSLocalizedString(@"rename pairing alert msg", nil)];
+//    
+//    UITextView *txv = [[UITextView alloc] init];
+//    [alertView addSubview:txv];
+    
+    DLAVAlertView *alertView = [[DLAVAlertView alloc] initWithTitle:NSLocalizedString(@"warning", nil)
+                                                            message:NSLocalizedString(@"rename pairing alert msg", nil)
+                                                            delegate:nil
+                                                            cancelButtonTitle:NSLocalizedString(@"cancel", nil)
+                                                            otherButtonTitles:NSLocalizedString(@"ok", nil), nil];
+    alertView.alertViewStyle = DLAVAlertViewStylePlainTextInput;
+    [alertView showWithCompletion:^(DLAVAlertView *alertView, NSInteger buttonIndex) {
         if(buttonIndex != alertView.cancelButtonIndex)
         {
-            [BAPairingData _deleteObjects:[NSArray arrayWithObject:self.pairingData]];
-            [BAPairingData _saveContext];
+            NSString *newName = [alertView textFieldTextAtIndex:0];
+            
+            // a quick validation
+            if(newName.length > 2)
+            {
+                pairingData.pairingName = newName;
+                [BAPairingData _saveContext];
+            }
+            else {
+                DLAVAlertView *illegalNewNameAlert = [[DLAVAlertView alloc] initWithTitle:NSLocalizedString(@"error", nil)
+                                                                                    message:NSLocalizedString(@"rename pairing illegal new name error msg", nil)
+                                                                                    delegate:nil
+                                                                                    cancelButtonTitle:NSLocalizedString(@"ok", nil)
+                                                                                    otherButtonTitles:nil, nil];
+                [illegalNewNameAlert showWithCompletion:nil];
+            }
         }
-    }
+    }];
 }
 
 #pragma Data model changes callback

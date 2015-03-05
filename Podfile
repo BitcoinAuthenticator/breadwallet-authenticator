@@ -1,3 +1,3 @@
 workspace 'BreadWallet'
 
-pod 'AFNetworking', '~> 2.0'
+pod 'DLAlertView', '~> 1.2.4'

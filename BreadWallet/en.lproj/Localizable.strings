@@ -434,7 +434,16 @@
 "delete pairing alert msg" = "Are you sure you want to delete the Authenticator pairing?";
 
 /* No comment provided by engineer. */
-"warning" = "Warning";
+"rename pairing alert msg" = "Choose a new name for the Authenticator pairing";
+
+/* No comment provided by engineer. */
+"rename pairing illegal new name error msg" = "Choose a new name that is at least 2 characters long";
+
+/* No comment provided by engineer. */
+"warning" = "Warning !";
+
+/* No comment provided by engineer. */
+"error" = "Error !";
 
 /* No comment provided by engineer. */
 "ok" = "Ok";
