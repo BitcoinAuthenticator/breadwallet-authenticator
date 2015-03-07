@@ -13,4 +13,6 @@
 
 @property(nonatomic, strong) BAPairingData *pairingData;
 
+@property (weak, nonatomic) IBOutlet UITableView *tblView;
+
 @end

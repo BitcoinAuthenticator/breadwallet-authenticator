@@ -89,8 +89,11 @@ static NSString *CellIdentifier = @"authenticatorWalletCellIdentifier";
     //      10) image view
     //      11) Wallet name label
     //      12) wallet id label
-    UILabel *label = (UILabel *)[cell.contentView viewWithTag:11];
-    [label setText:d.pairingName];
+    UILabel *name = (UILabel *)[cell.contentView viewWithTag:11];
+    [name setText:d.pairingName];
+    
+    UILabel *idx = (UILabel *)[cell.contentView viewWithTag:12];
+    [idx setText:[NSString stringWithFormat:@"%@", d.walletIdx]];
     
     return cell;
 }

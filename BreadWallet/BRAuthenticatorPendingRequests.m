@@ -9,6 +9,9 @@
 #import "BRAuthenticatorPendingRequests.h"
 #import <Authenticator/NSManagedObject+Manager.h>
 #import "DLAVAlertView.h"
+#import "Authenticator/BARemoteNotificationData.h"
+
+#import "Authenticator/RemoteNotificationHandler.h"
 
 @interface BRAuthenticatorPendingRequests ()
 
@@ -17,16 +20,13 @@
 @implementation BRAuthenticatorPendingRequests
 
 @synthesize pairingData;
+NSArray *pendingRequests;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
-    
-    [[NSNotificationCenter defaultCenter]
-                             addObserver:self
-                             selector:@selector(handleDataModelChange:)
-                             name:NSManagedObjectContextObjectsDidChangeNotification
-                             object:[BAPairingData _context]];
+     [self loadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,16 +61,12 @@
          {
              [BAPairingData _deleteObjects:[NSArray arrayWithObject:self.pairingData]];
              [BAPairingData _saveContext];
+             [self.navigationController dismissViewControllerAnimated:YES completion:nil];
          }
       }];
 }
 
 - (IBAction)rename:(id)sender {
-//    SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:NSLocalizedString(@"warning", nil) andMessage:NSLocalizedString(@"rename pairing alert msg", nil)];
-//    
-//    UITextView *txv = [[UITextView alloc] init];
-//    [alertView addSubview:txv];
-    
     DLAVAlertView *alertView = [[DLAVAlertView alloc] initWithTitle:NSLocalizedString(@"warning", nil)
                                                             message:NSLocalizedString(@"rename pairing alert msg", nil)
                                                             delegate:nil
@@ -87,6 +83,7 @@
             {
                 pairingData.pairingName = newName;
                 [BAPairingData _saveContext];
+                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
             }
             else {
                 DLAVAlertView *illegalNewNameAlert = [[DLAVAlertView alloc] initWithTitle:NSLocalizedString(@"error", nil)
@@ -100,18 +97,23 @@
     }];
 }
 
-#pragma Data model changes callback
-
-- (void)handleDataModelChange:(NSNotification *)note
-{
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
-
 #pragma UITableView data source + delegate
 
 -(void)loadData
 {
-   
+    pendingRequests = [self.pairingData.pendigNotifications array];
+//    
+//    if(pendingRequests.count == 0) {
+//        NSDictionary *reqPayload = [NSDictionary dictionaryWithObjectsAndKeys:@"1.1.1.1", @"LocalIP", @"2.2.2.2", @"ExternalIP", nil];
+//        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"2", @"RequestType",
+//                             @"959788595",@"WalletID",
+//                             @"67890",@"RequestID",
+//                             @"my msg", @"CustomMsg",
+//                             reqPayload, @"ReqPayload", nil];
+//        
+//        [RemoteNotificationHandler handleRemoteNotificaitonPayload:dic];
+//    }
+    [self.tblView reloadData];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -119,13 +121,18 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return pendingRequests.count;
 }
 
 static NSString *CellIdentifier = @"pendingReqCellIdentifier";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
+    BARemoteNotificationData *d = [self.pairingData.pendigNotifications objectAtIndex:indexPath.row];
+    // Tags:
+    //      10) label
+    UILabel *lbl = (UILabel *)[cell.contentView viewWithTag:10];
+    [lbl setText:[NSString stringWithFormat:@"what %d", indexPath.row]];
     
     return cell;
 }
@@ -136,11 +143,19 @@ static NSString *CellIdentifier = @"pendingReqCellIdentifier";
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return NO;
+    return YES;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.pairingData removePendigNotificationsObject:[self.pairingData.pendigNotifications objectAtIndex:indexPath.row]];
+        [BAPairingData _saveContext];
+        [self.tblView reloadData];
+    }
 }
 
 @end
