@@ -650,21 +650,33 @@
                                 <color key="sectionIndexColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="pendingReqCellIdentifier" id="UR3-zP-80E">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="pendingReqCellIdentifier" rowHeight="70" id="UR3-zP-80E">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UR3-zP-80E" id="flD-XC-s8C">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" useAutomaticPreferredMaxLayoutWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vKU-rg-KXA">
-                                                    <rect key="frame" x="51" y="12" width="130" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="54" y="8" width="130" height="21"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="11" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" useAutomaticPreferredMaxLayoutWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wdo-A6-w4p">
+                                                    <rect key="frame" x="54" y="31" width="130" height="21"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="b65-r0-Lii">
+                                                    <rect key="frame" x="10" y="8" width="40" height="40"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <segue destination="rqt-Ar-abJ" kind="push" id="t7n-wd-EJw"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -703,6 +715,32 @@
             </objects>
             <point key="canvasLocation" x="2351" y="1343"/>
         </scene>
+        <!--Pending Request-->
+        <scene sceneID="Ixm-wc-waW">
+            <objects>
+                <viewController title="Pending Request" id="rqt-Ar-abJ" customClass="BRAuthenticatorPendingRequestViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mG5-FN-xvn"/>
+                        <viewControllerLayoutGuide type="bottom" id="uek-sU-7JF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aje-NS-2Ro">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="6gj-Zj-Yq8">
+                        <barButtonItem key="leftBarButtonItem" image="x" id="jtW-2i-PNP">
+                            <connections>
+                                <action selector="close:" destination="rqt-Ar-abJ" id="eYZ-xw-yUv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nSr-Oh-7It" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2737" y="1339"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="xl1-66-UPf">
             <objects>
@@ -717,7 +755,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tWP-7g-jg8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2894" y="1362"/>
+            <point key="canvasLocation" x="2346" y="2045"/>
         </scene>
         <!--Amount View Controller-->
         <scene sceneID="53j-BI-jfv">
@@ -1123,7 +1161,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eo1-Mc-5Xo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3287" y="1362"/>
+            <point key="canvasLocation" x="2739" y="2045"/>
         </scene>
         <!--Receive View Controller-->
         <scene sceneID="qxd-iA-4Pl">
@@ -1222,7 +1260,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3RX-tv-4mC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3682" y="1362"/>
+            <point key="canvasLocation" x="3134" y="2045"/>
         </scene>
         <!--Receive View Controller-->
         <scene sceneID="1OV-CI-Wjb">
@@ -2498,6 +2536,7 @@ WRITE IT DOWN and keep it safe. Your phrase is the only way to recover your wall
         </scene>
     </scenes>
     <resources>
+        <image name="arrow" width="82" height="82"/>
         <image name="authenticatorIcon" width="72" height="72"/>
         <image name="breadwallet" width="100" height="15"/>
         <image name="breadwallet-big" width="257" height="151"/>

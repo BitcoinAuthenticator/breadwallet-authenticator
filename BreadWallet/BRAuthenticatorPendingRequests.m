@@ -10,7 +10,7 @@
 #import <Authenticator/NSManagedObject+Manager.h>
 #import "DLAVAlertView.h"
 #import "Authenticator/BARemoteNotificationData.h"
-
+#import "Authenticator/BARemoteNotificationMessageParser.h"
 #import "Authenticator/RemoteNotificationHandler.h"
 
 @interface BRAuthenticatorPendingRequests ()
@@ -130,9 +130,26 @@ static NSString *CellIdentifier = @"pendingReqCellIdentifier";
     
     BARemoteNotificationData *d = [self.pairingData.pendigNotifications objectAtIndex:indexPath.row];
     // Tags:
-    //      10) label
-    UILabel *lbl = (UILabel *)[cell.contentView viewWithTag:10];
-    [lbl setText:[NSString stringWithFormat:@"what %d", indexPath.row]];
+    //      10) type
+    //      11) custom msg
+    UILabel *type = (UILabel *)[cell.contentView viewWithTag:10];
+    UILabel *msg = (UILabel *)[cell.contentView viewWithTag:11];
+    switch ([d.type intValue]) {
+        case SignTx:
+        {
+            SignTxMessageParser *parser = [[SignTxMessageParser alloc] init];
+            [parser fromString:d.data type:SignTx];
+            
+            [type setText:@"Sign Tx"];
+            [msg setText:parser.customMsg];
+            break;
+        }
+        default:
+            [type setText:@"Unkown"];
+            [msg setText:@""];
+            break;
+    }
+    
     
     return cell;
 }
